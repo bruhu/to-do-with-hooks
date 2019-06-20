@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css"
+import "./App.css";
 
 //another component!
 //we will pass here the props written below - using destructure
@@ -8,22 +8,31 @@ function Todo({ todo, index }) {
 }
 
 //third functional component we create, will contain the form
-function TodoForm({addTodo}){
+function TodoForm({ addTodo }) {
   // this form will have a state to it, so we use the hook again
   // value  for the state, setValue for the method that updates the state - useState empty by default
-const [value, setValue] = useState("");
+  const [value, setValue] = useState("");
 
-const handleSubmit = e => {
-  e.preventDefault();
-  // prevent to submit with an empty value:
-  
-}
-return(
-  <form onSubmit={handleSubmit}>
-    {/* in setValue we want to send whatever is in that input */}
-<input type="text" className="input" value={value} onChange={e => setValue(e.target.value)}></input>
-  </form>
-)
+  const handleSubmit = e => {
+    e.preventDefault();
+    // prevent to submit with an empty value:
+    if (!value) return;
+    addTodo(value);
+    // to clear the form out:
+    setValue("");
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* in setValue we want to send whatever is in that input */}
+      <input
+        type="text"
+        className="input"
+        value={value}
+        placeholder="Add something to do"
+        onChange={e => setValue(e.target.value)}
+      />
+    </form>
+  );
 }
 
 //this will be the main component
@@ -46,6 +55,12 @@ function App() {
     }
   ]);
 
+  const addToDo = text => {
+    // we take the array of todos (whole thing w/spread operator) and add text
+    const newTodos = [...todos, { text }];
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <h4>Tell me what to do!</h4>
@@ -56,6 +71,7 @@ function App() {
         {todos.map((todo, index) => (
           <Todo key={index} index={index} todo={todo} />
         ))}
+        <TodoForm addTodo={addToDo} />
       </div>
     </div>
   );
