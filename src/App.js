@@ -1,5 +1,15 @@
 import React, {useState} from "react"
 
+//another component!
+//we will pass here the props written below - using destructure
+function Todo({todo, index}){
+return(
+  <div className="todo">
+    {todo.text}
+  </div>
+)
+}
+
 //this will be the main component
 function App(){
 //our state - with 2 variables (also deconstructing):
@@ -28,7 +38,7 @@ return(
 {/* todos comes from the destructuring above - todo will be each todo and representing each iteration */}
 {/* so for each todo we want to output a todo component */}
 {todos.map(todo, index) => (
-
+<Todo key={index} index={index} todo={todo}></Todo>
 )}
 
     </div>
