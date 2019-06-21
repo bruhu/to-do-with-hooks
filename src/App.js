@@ -3,8 +3,19 @@ import "./App.css";
 
 //another component!
 //we will pass here the props written below - using destructure
-function Todo({ todo, index }) {
-  return <div className="todo">{todo.text}</div>;
+function Todo({ todo, index, completeTodo }) {
+  // style will add crossed text to a done task if it is completed
+  return (
+    <div
+      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+      className="todo"
+    >
+      {todo.text}
+      <div>
+        <button onClick={() => completeTodo(index)}>Complete</button>
+      </div>
+    </div>
+  );
 }
 
 //third functional component we create, will contain the form
@@ -61,6 +72,12 @@ function App() {
     setTodos(newTodos);
   };
 
+  const completeTodo = index => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <h4>Tell me what to do!</h4>
@@ -69,7 +86,12 @@ function App() {
         {/* todos comes from the destructuring above - todo will be each todo and representing each iteration */}
         {/* so for each todo we want to output a todo component */}
         {todos.map((todo, index) => (
-          <Todo key={index} index={index} todo={todo} />
+          <Todo
+            key={index}
+            index={index}
+            todo={todo}
+            completeTodo={completeTodo}
+          />
         ))}
         <TodoForm addTodo={addToDo} />
       </div>
