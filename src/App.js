@@ -3,7 +3,7 @@ import "./App.css";
 
 //another component!
 //we will pass here the props written below - using destructure
-function Todo({ todo, index, completeTodo, deleteTodo }) {
+function Todo({ todo, index, completeTodo, removeTodo }) {
   // style will add crossed text to a done task if it is completed
   return (
     <div
@@ -13,7 +13,7 @@ function Todo({ todo, index, completeTodo, deleteTodo }) {
       {todo.text}
       <div>
         <button onClick={() => completeTodo(index)}>Complete</button>
-        <button onClick={() => deleteTodo(index)}>x</button>
+        <button onClick={() => removeTodo(index)}>x</button>
       </div>
     </div>
   );
@@ -79,6 +79,13 @@ function App() {
     setTodos(newTodos);
   };
 
+  const removeTodo = index => {
+    const newTodos = [...todos];
+    // splice single (1) todos by index
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <h4>Tell me what to do!</h4>
@@ -92,6 +99,7 @@ function App() {
             index={index}
             todo={todo}
             completeTodo={completeTodo}
+            removeTodo={removeTodo}
           />
         ))}
         <TodoForm addTodo={addToDo} />
