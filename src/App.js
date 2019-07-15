@@ -6,15 +6,17 @@ import "./App.css";
 function Todo({ todo, index, completeTodo, removeTodo }) {
   // style will add crossed text to a done task if it is completed
   return (
+    <div className="todo-container col-">
     <div
       style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
-      className="todo"
+      className="todo-text "
     >
       {todo.text}
-      <div>
-        <button onClick={() => completeTodo(index)}>Complete</button>
-        <button onClick={() => removeTodo(index)}>x</button>
+      <div className="buttons col-8">
+        <button onClick={() => completeTodo(index)} className="btn btn-outline-success" >Complete</button>
+        <button onClick={() => removeTodo(index)} className="btn btn-outline-danger">x</button>
       </div>
+    </div>
     </div>
   );
 }

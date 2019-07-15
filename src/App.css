@@ -1,7 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
+
 .app {
   background: lightcoral;
   padding: 30px;
   height: 100vh;
+  font-family: "PT Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .todo-list {
@@ -9,9 +15,14 @@
   border-radius: 4px;
   padding: 5px;
   max-width: 400px;
+  padding: 3em;
 }
 
-.todo {
+.todo-container{
+  
+}
+
+.todo-text {
   /* background: lightgoldenrodyellow; */
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
   padding: 15px 10px;
